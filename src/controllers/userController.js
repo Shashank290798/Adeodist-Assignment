@@ -36,11 +36,11 @@ exports.createUser = async (req, res) => {
         const user = await User.create({ name, role, email, password: hashedPassword });
 
         const token = generateToken(user.id, user.role);
-        const expiresIn = jwt.decode(token).exp;
+ 
 
         res
             .status(201)
-            .json({ message: "User created successfully", user, token, expiresIn });
+            .json({ message: "User created successfully", user, token });
     } catch (error) {
         res.status(500).json({ error: "An error occurred while creating the user" });
     }
